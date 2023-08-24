@@ -1,0 +1,60 @@
+name: Staging Deployment
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: staging
+    steps:
+      - name: Assume Role
+        run: |
+          export AWS_ACCESS_KEY_ID="${{ secrets.AWS_ACCESS_KEY_ID_TOOLS }}"
+          export AWS_SECRET_ACCESS_KEY="${{ secrets.AWS_SECRET_ACCESS_KEY_TOOLS }}"
+          export AWS_REGION="${{ vars.AWS_REGION }}"
+          export AWS_ROLE_TO_ASSUME="${{ secrets.AWS_ROLE_TO_ASSUME_ARN }}"
+
+          CREDENTIAL=$(aws sts assume-role \
+            --duration-seconds 900 \
+            --role-arn $AWS_ROLE_TO_ASSUME \
+            --role-session-name SAMSession \
+            --output text \
+            --query 'Credentials.[AccessKeyId,SecretAccessKey,SessionToken,Expiration]')
+          
+          export AWS_ACCESS_KEY_ID=$(echo $CREDENTIAL | awk '{print $1}')
+          export AWS_SECRET_ACCESS_KEY=$(echo $CREDENTIAL | awk '{print $2}')
+          export AWS_SESSION_TOKEN=$(echo $CREDENTIAL | awk '{print $3}')
+          export SESSION_EXPIRATION=$(echo $CREDENTIAL | awk '{print $4}')
+
+          echo "AWS_ACCESS_KEY_ID=$(echo $CREDENTIAL | awk '{print $1}')" >> $GITHUB_ENV
+          echo "AWS_SECRET_ACCESS_KEY=$(echo $CREDENTIAL | awk '{print $2}')" >> $GITHUB_ENV
+          echo "AWS_SESSION_TOKEN=$(echo $CREDENTIAL | awk '{print $3}')" >> $GITHUB_ENV
+          echo "SESSION_EXPIRATION=$(echo $CREDENTIAL | awk '{print $4}')" >> $GITHUB_ENV
+
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: SAM Install
+        uses: aws-actions/setup-sam@v2
+        with:
+          use-installer: true
+
+      - name: SAM Validate
+        run: |
+          sam validate
+
+      - name: SAM Build
+        run: |
+          sam build --use-container
+
+      - name: SAM Deploy
+        run: |
+          sam deploy --no-confirm-changeset --no-fail-on-empty-changeset
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_wrapper: false

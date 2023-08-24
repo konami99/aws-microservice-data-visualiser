@@ -8,10 +8,9 @@ variable "bucket_name" {
 
 provider "aws" {
   region = var.aws_region
-  version = "~> 2.52"
 }
 
 module "website" {
-  source = "./.deploy/terraform/static-site"
+  source      = "./.deploy/terraform/static-site"
   bucket_name = var.bucket_name
 }
