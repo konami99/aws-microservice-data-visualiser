@@ -56,6 +56,8 @@ jobs:
 
       - name: Terraform Plan
         run: |
+          terraform workspace list
+          terraform workspace select production || terraform workspace new production
           terraform plan
         env:
           ENV: production
