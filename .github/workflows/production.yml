@@ -56,6 +56,12 @@ jobs:
 
       - name: Terraform Plan
         run: |
-          terraform plan -var "env=$ENV"
+          terraform plan
+        env:
+          ENV: production
+
+      - name: Terraform Apply
+        run: |
+          terraform apply -auto-approve
         env:
           ENV: production
