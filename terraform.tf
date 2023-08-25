@@ -14,3 +14,10 @@ module "website" {
   source      = "./.deploy/terraform/static-site"
   bucket_name = var.bucket_name
 }
+
+terraform {
+  backend "s3" {
+    key    = "state"
+    region = "us-west-2"
+  }
+}
