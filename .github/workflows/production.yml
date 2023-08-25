@@ -41,3 +41,21 @@ jobs:
         uses: hashicorp/setup-terraform@v2
         with:
           terraform_wrapper: false
+
+      - name: Terraform Init
+        run: |
+          terraform init -backend-config="bucket=aws-microservice-data-visualiser-$ENV"
+          terraform workspace list
+          terraform workspace select production || terraform workspace new production
+        env:
+          ENV: production
+
+      - name: Terraform Validate
+        run: |
+          terraform validate
+
+      - name: Terraform Plan
+        run: |
+          terraform plan -var "env=$ENV"
+        env:
+          ENV: production
