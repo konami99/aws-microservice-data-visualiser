@@ -52,6 +52,7 @@ jobs:
 
       - name: Terraform Validate
         run: |
+          terraform init -backend=false
           terraform validate
 
       - name: Terraform Plan
