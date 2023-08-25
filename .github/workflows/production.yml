@@ -44,11 +44,9 @@ jobs:
 
       - name: Terraform Init
         run: |
-          terraform init -backend-config="bucket=aws-microservice-data-visualiser-$ENV"
+          terraform init -backend-config="bucket=aws-microservice-data-visualiser-terraform"
           terraform workspace list
           terraform workspace select production || terraform workspace new production
-        env:
-          ENV: production
 
       - name: Terraform Validate
         run: |
