@@ -59,7 +59,7 @@ jobs:
         run: |
           terraform workspace list
           terraform workspace select staging || terraform workspace new staging
-          terraform plan
+          terraform plan -var "bucket_name=aws-microservice-data-visualiser-$ENV"
         env:
           ENV: staging
 
