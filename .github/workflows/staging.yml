@@ -67,6 +67,6 @@ jobs:
         run: |
           terraform workspace list
           terraform workspace select staging || terraform workspace new staging
-          terraform apply -auto-approve
+          terraform apply -auto-approve -var "bucket_name=aws-microservice-data-visualiser-$ENV"
         env:
           ENV: staging
