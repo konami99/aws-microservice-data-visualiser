@@ -1,4 +1,11 @@
 version = 0.1
+
+[prod.validate.parameters]
+lint = true
+
+[staging.validate.parameters]
+lint = true
+
 [prod.deploy.parameters]
 stack_name = "data-visualiser"
 resolve_s3 = true
