@@ -10,6 +10,10 @@ Globals:
   Function:
     Timeout: 3
 
+Parameters:
+  DestinationBucketName:
+    Type: String
+
 Resources:
   UpdateS3StaticWebsiteFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
@@ -20,6 +24,12 @@ Resources:
       MemorySize: 512
       Architectures:
         - x86_64
+      Environment:
+        Variables:
+          DestinationBucketName: !Ref DestinationBucketName
+      Policies:
+        - S3CrudPolicy:
+            BucketName: !Ref DestinationBucketName
     Metadata: # Manage esbuild properties
       BuildMethod: esbuild
       BuildProperties:

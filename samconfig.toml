@@ -1,8 +1,16 @@
 version = 0.1
 [prod.deploy.parameters]
-stack_name = "aws-microservice-data-visualiser"
+stack_name = "data-visualiser"
 resolve_s3 = true
-s3_prefix = "aws-microservice-data-visualiser"
+s3_prefix = "data-visualiser"
+region = "us-west-2"
+capabilities = "CAPABILITY_IAM"
+image_repositories = []
+
+[staging.deploy.parameters]
+stack_name = "data-visualiser"
+resolve_s3 = true
+s3_prefix = "data-visualiser"
 region = "us-west-2"
 capabilities = "CAPABILITY_IAM"
 image_repositories = []
