@@ -78,11 +78,11 @@ jobs:
 
       - name: SAM Validate
         run: |
-          sam validate
+          sam validate --config-env prod
 
       - name: SAM Build
         run: |
-          sam build --use-container
+          sam build --use-container --config-env prod
 
       - name: SAM Deploy
         run: |

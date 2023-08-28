@@ -78,13 +78,13 @@ jobs:
 
       - name: SAM Validate
         run: |
-          sam validate
+          sam validate --config-env staging
 
       - name: SAM Build
         run: |
-          sam build --use-container
+          sam build --use-container --config-env staging
 
       - name: SAM Deploy
         run: |
-          sam deploy --no-confirm-changeset --no-fail-on-empty-changeset --config-env prod --parameter-overrides DestinationBucketName=aws-microservice-data-visualiser-staging
+          sam deploy --no-confirm-changeset --no-fail-on-empty-changeset --config-env staging --parameter-overrides DestinationBucketName=aws-microservice-data-visualiser-staging
 
