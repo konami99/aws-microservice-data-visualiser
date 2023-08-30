@@ -39,6 +39,40 @@ Resources:
         EntryPoints: 
           - app.ts
 
+  UpdateS3StaticWebsiteFunctionSchedule:
+    Type: AWS::Scheduler::Schedule
+    Properties:
+      Name: 'UpdateS3StaticWebsiteFunctionSchedule'
+      ScheduleExpression: 'rate(1 minute)'
+      FlexibleTimeWindow:
+        Mode: 'OFF'
+      Target:
+        Arn: !GetAtt UpdateS3StaticWebsiteFunction.Arn
+        RoleArn: !GetAtt UpdateS3StaticWebsiteFunctionScheduleRole.Arn
+
+  UpdateS3StaticWebsiteFunctionScheduleRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - scheduler.amazonaws.com
+            Action:
+              - sts:AssumeRole
+      Policies:
+        - PolicyName: UpdateS3StaticWebsiteFunctionScheduleRolePolicy
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Effect: Allow
+                Action:
+                  - 'lambda:InvokeFunction'
+                Resource:
+                  - !GetAtt UpdateS3StaticWebsiteFunction.Arn
+
 Outputs:
   UpdateS3StaticWebsiteFunction:
     Description: "Hello World Lambda Function ARN"
