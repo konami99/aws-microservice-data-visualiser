@@ -7,6 +7,7 @@ const s3 = new S3();
 export const lambdaHandler = async (event: any): Promise<any> => {
   try {
 		await s3.putObject({
+			ContentType: 'text/html',
 			Bucket: bucketName,
 			Key: 'index.html',
 			Body: '<!doctype html><html><head></head><body><h1>Hello this is a test</h1></body></html>'
