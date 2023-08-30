@@ -9,7 +9,7 @@ export const lambdaHandler = async (event: any): Promise<any> => {
 		await s3.putObject({
 			Bucket: bucketName,
 			Key: 'index.html',
-			Body: '<html><head></head><body>this is a test 123</body></html>'
+			Body: '<!doctype html><html><head></head><body><h1>Hello this is a test</h1></body></html>'
 		}).promise();
 				
 		return {
