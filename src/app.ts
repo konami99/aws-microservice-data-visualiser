@@ -1,11 +1,23 @@
-import { S3 } from "aws-sdk";
+import AWS from "aws-sdk";
 
 const bucketName = process.env.DestinationBucketName as string;
 
-const s3 = new S3();
+const s3 = new AWS.S3();
+const dynamoDBClient = new AWS.DynamoDB.DocumentClient();
 
 export const lambdaHandler = async (event: any): Promise<any> => {
   try {
+		var params: AWS.DynamoDB.DocumentClient.QueryInput = {
+			TableName: 'newweatherdata',
+			KeyConditionExpression: 'partitionKey = :partitionKeyValue',
+			ExpressionAttributeValues: { ':partitionKeyValue': 'Sydney' },
+			Limit: 10
+		}
+
+		const data = await dynamoDBClient.query(params).promise();
+
+		console.log(data);
+			
 		await s3.putObject({
 			ContentType: 'text/html',
 			Bucket: bucketName,

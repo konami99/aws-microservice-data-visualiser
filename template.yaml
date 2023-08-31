@@ -43,7 +43,7 @@ Resources:
     Type: AWS::Scheduler::Schedule
     Properties:
       Name: 'UpdateS3StaticWebsiteFunctionSchedule'
-      ScheduleExpression: 'rate(1 day)'
+      ScheduleExpression: 'rate(1 minute)'
       FlexibleTimeWindow:
         Mode: 'OFF'
       Target:
