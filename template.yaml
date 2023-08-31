@@ -30,6 +30,8 @@ Resources:
       Policies:
         - S3CrudPolicy:
             BucketName: !Ref DestinationBucketName
+        - DynamoDBCrudPolicy:
+            TableName: newweatherdata
     Metadata: # Manage esbuild properties
       BuildMethod: esbuild
       BuildProperties:
