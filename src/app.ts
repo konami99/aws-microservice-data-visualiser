@@ -9,7 +9,7 @@ export const lambdaHandler = async (event: any): Promise<any> => {
   try {
 		var params: AWS.DynamoDB.DocumentClient.QueryInput = {
 			TableName: 'newweatherdata',
-			KeyConditionExpression: 'partitionKey = :partitionKeyValue',
+			KeyConditionExpression: 'city = :partitionKeyValue',
 			ExpressionAttributeValues: { ':partitionKeyValue': 'Sydney' },
 			Limit: 10
 		}
