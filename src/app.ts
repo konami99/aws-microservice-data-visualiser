@@ -65,16 +65,31 @@ type Weather = {
 	temperature: number
 }
 
-const generateLabels = (data: Weather[]): string => {
-	// labels: ['January', 'February', 'March', 'April', 'May'],
+const generateLabels = (items: Weather[]): string => {
+	// return `labels: ['January', 'February', 'March', 'April', 'May'],`
 
-	return `labels: ['January', 'February', 'March', 'April', 'May'],`
+	var labels = `labels: [`
+	items.forEach((item: Weather, index) => {
+		labels += `'` + item.datetime + `'`;
+		if (index < items.length - 1) {
+			labels += `, `;
+		}
+	})
+	labels += `],`
+	return labels
 }
 
-const generateData = (data: Weather[]): string => {
-	// data: [65, 59, 80, 81, 56],
-
-	return `data: [65, 59, 80, 81, 56],`
+const generateData = (items: Weather[]): string => {
+	// return `data: [65, 59, 80, 81, 56],`
+	var data = `data: [`
+	items.forEach((item: Weather, index) => {
+		data += item.temperature;
+		if (index < items.length - 1) {
+			data += `, `;
+		}
+	})
+	data += `],`
+	return data
 }
 
 export const lambdaHandler = async (event: any): Promise<any> => {
