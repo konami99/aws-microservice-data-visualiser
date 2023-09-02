@@ -14,7 +14,8 @@
   },
   "dependencies": {
     "esbuild": "^0.14.14",
-    "aws-sdk": "^2.1447.0"
+    "aws-sdk": "^2.1447.0",
+    "date-fns": "^2.30.0"
   },
   "devDependencies": {
     "@types/aws-lambda": "^8.10.92",

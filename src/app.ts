@@ -1,4 +1,5 @@
 import AWS from "aws-sdk";
+import { format } from "date-fns";
 
 const bucketName = process.env.DestinationBucketName as string;
 
@@ -65,12 +66,17 @@ type Weather = {
 	temperature: number
 }
 
+const unixTimeToTime = (unixTime: number): string => {
+	const date = new Date(unixTime);
+	return format(date, 'HH:mm');
+}
+
 const generateLabels = (items: Weather[]): string => {
 	// return `labels: ['January', 'February', 'March', 'April', 'May'],`
 
 	var labels = `labels: [`
 	items.forEach((item: Weather, index) => {
-		labels += `'` + item.datetime + `'`;
+		labels += `'` + unixTimeToTime(item.datetime) + `'`;
 		if (index < items.length - 1) {
 			labels += `, `;
 		}
