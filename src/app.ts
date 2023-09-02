@@ -104,6 +104,7 @@ export const lambdaHandler = async (event: any): Promise<any> => {
 			TableName: 'newweatherdata',
 			KeyConditionExpression: 'city = :partitionKeyValue',
 			ExpressionAttributeValues: { ':partitionKeyValue': 'Sydney' },
+			ScanIndexForward: false,
 			Limit: 10
 		}
 
