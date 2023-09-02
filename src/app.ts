@@ -23,18 +23,18 @@ const indexTemplate = (labels: string, data: string): string => {
 					// Sample data for the chart
 					const data = {
 	` +
-	`
-						labels: ['January', 'February', 'March', 'April', 'May'],
-	` +
+	
+						labels
+		+
 	`
 						datasets: [{
-							label: 'Monthly Sales',
+							label: "Sydney's temperature",
 							backgroundColor: 'rgba(75, 192, 192, 0.2)',
 							borderColor: 'rgba(75, 192, 192, 1)',
 	` +
-	`
-							data: [65, 59, 80, 81, 56],
-	` +
+	
+							data
+		+
 	`
 							fill: false,
 						}]
@@ -77,7 +77,7 @@ export const lambdaHandler = async (event: any): Promise<any> => {
 			ContentType: 'text/html',
 			Bucket: bucketName,
 			Key: 'index.html',
-			Body: '<!DOCTYPE html><html><head></head><body>test</body></html>'
+			Body: indexTemplate(`labels: ['January', 'February', 'March', 'April', 'May'],`, `data: [65, 59, 80, 81, 56],`)
 		}).promise();
 
 		return {
