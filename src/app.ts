@@ -77,9 +77,9 @@ export const lambdaHandler = async (event: any): Promise<any> => {
 			ContentType: 'text/html',
 			Bucket: bucketName,
 			Key: 'index.html',
-			Body: indexTemplate
+			Body: '<!DOCTYPE html><html><head></head><body>test</body></html>'
 		}).promise();
-				
+
 		return {
 			statusCode: 200,
 			body: JSON.stringify({
