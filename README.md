@@ -72,7 +72,7 @@ The primary key of the table is a composite key: "city" is the partition key, an
 <img width="650" alt="Screen Shot 2023-09-09 at 11 00 37 pm" src="https://github.com/konami99/aws-microservice-data-visualiser/assets/166879/21260e04-283e-4444-a71c-0ea5bb1743b6">
 <img width="1013" alt="Screen Shot 2023-09-09 at 11 02 16 pm" src="https://github.com/konami99/aws-microservice-data-visualiser/assets/166879/3dbe96f5-f489-4b48-a84f-ae511156160e">
 
-So when Lambda queries the table, it has to speficy the partition key:
+When Lambda queries the table, it has to speficy the partition key:
 
 `src/app.ts`
 
@@ -113,5 +113,27 @@ This is how the queried data looks like in decending order:
   ],
   Count: 3,
   ScannedCount: 3
+}
+```
+
+But to get the data to display in `index.html`, we have to loop from the lowest datetime to highest datetime:
+
+<img width="825" alt="Screen Shot 2023-09-09 at 11 19 40 pm" src="https://github.com/konami99/aws-microservice-data-visualiser/assets/166879/71e8a70d-f5a8-49ff-a688-ac13433895f4">
+
+
+That's why I used `reverse()` to reverse the array again when generating data and generating labels:
+
+```
+const generateData = (items: Weather[]): string => {
+  const reversedItems = items.slice().reverse();
+  var data = `data: [`
+  reversedItems.forEach((item: Weather, index) => {
+    data += item.temperature;
+    if (index < items.length - 1) {
+      data += `, `;
+    }
+  })
+  data += `],`
+  return data
 }
 ```
