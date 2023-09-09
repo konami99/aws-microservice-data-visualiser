@@ -61,9 +61,9 @@ resource "aws_s3_bucket_public_access_block" "public_access_block" {
 
 ## Final Configured Bucket
 The final configured bucket looks like this:
-<img width="970" alt="Screen Shot 2023-09-09 at 10 38 09 pm" src="https://github.com/konami99/aws-microservice-data-visualiser/assets/166879/fd2f2a34-f714-490b-aa53-36a2c6d4fb39">
-<img width="778" alt="Screen Shot 2023-09-09 at 10 38 22 pm" src="https://github.com/konami99/aws-microservice-data-visualiser/assets/166879/0f7560e0-a3fb-498e-b204-b4eee55c4a63">
-<img width="635" alt="Screen Shot 2023-09-09 at 10 38 45 pm" src="https://github.com/konami99/aws-microservice-data-visualiser/assets/166879/e5fb4b36-8db9-4327-8381-662d796712fe">
+<img width="970" alt="266781210-fd2f2a34-f714-490b-aa53-36a2c6d4fb39" src="https://github.com/konami99/aws-microservice-data-visualiser/assets/166879/e5214433-196e-4fa7-b10d-314cc0e8e03c">
+<img width="778" alt="266781217-0f7560e0-a3fb-498e-b204-b4eee55c4a63" src="https://github.com/konami99/aws-microservice-data-visualiser/assets/166879/0ea69f49-2756-4d06-8c22-9bc718e072e0">
+<img width="635" alt="266781225-e5fb4b36-8db9-4327-8381-662d796712fe" src="https://github.com/konami99/aws-microservice-data-visualiser/assets/166879/a8201490-930d-4103-980a-d2bd25eed6a4">
 <img width="479" alt="Screen Shot 2023-09-09 at 10 45 33 pm" src="https://github.com/konami99/aws-microservice-data-visualiser/assets/166879/b268a84e-0762-40b0-886e-da994fe36abb">
 
 ## Lambda querying DynamoDB
