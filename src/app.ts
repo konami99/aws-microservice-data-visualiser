@@ -116,20 +116,20 @@ export const lambdaHandler = async (event: any): Promise<any> => {
 				{
 					city: 'Sydney',
 					humidity: 61,
-					datetime: 1692519662220,
-					temperature: 16.42
-				},
-				{
-					city: 'Sydney',
-					humidity: 61,
-					datetime: 1692519721614,
-					temperature: 16.42
-				},
-				{
-					city: 'Sydney',
-					humidity: 61,
-					datetime: 1692519781720,
+					datetime: 1692519781720, //20 August 2023 08:23:01.720
 					temperature: 16.34
+				},
+				{
+					city: 'Sydney',
+					humidity: 61,
+					datetime: 1692519721614, //20 August 2023 08:22:01.614
+					temperature: 16.42
+				},
+				{
+					city: 'Sydney',
+					humidity: 61,
+					datetime: 1692519662220, //20 August 2023 08:21:02.220
+					temperature: 16.42
 				}
 			],
 			Count: 3,
